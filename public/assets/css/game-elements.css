@@ -1,0 +1,62 @@
+/*
+ * Định dạng các nút Kéo, Búa, Bao và hình ảnh bên trong
+ */
+
+.cac-lua-chon {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.lua-chon {
+    /* Đặt kích thước cố định cho nút hình tròn */
+    width: 120px;
+    height: 120px;
+
+    /* Dùng flexbox để căn giữa hình ảnh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 50%;
+    cursor: pointer;
+    border: 4px solid var(--mau-vien);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.lua-chon img {
+    /* Đảm bảo hình ảnh vừa khít với nút */
+    width: 80px;
+    height: 80px;
+
+    /* Giữ nguyên tỉ lệ hình ảnh, không bị méo */
+    object-fit: contain;
+}
+
+.lua-chon.duoc-chon {
+    border-color: var(--mau-nhan);
+    box-shadow: 0 0 20px var(--mau-phat-sang), inset 0 0 10px var(--mau-phat-sang);
+    transform: scale(1.05);
+}
+
+.lua-chon.lam-mo {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.lua-chon.nguoi-thang {
+    animation: phat-sang-thang 1s infinite alternate;
+    border-color: var(--mau-thang);
+}
+
+@keyframes phat-sang-thang {
+    from {
+        box-shadow: 0 0 10px var(--mau-thang), 0 0 20px var(--mau-thang);
+    }
+    to {
+        box-shadow: 0 0 20px var(--mau-thang), 0 0 40px var(--mau-thang);
+    }
+}

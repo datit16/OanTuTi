@@ -1,0 +1,18 @@
+:root {
+  /* Bảng màu chính theo chủ đề xanh dương đậm */
+  --mau-nen-chinh: #0b0c10;
+  --mau-nen-phu: #1a1e26;
+  --mau-chu: #c5c6c7;
+  --mau-nhan: #66fcf1;
+  --mau-tuong-phan: #f7b733;
+
+  /* Màu trạng thái */
+  --mau-thang: #66fcf1;
+  --mau-thua: #ff6b6b;
+  --mau-hoa: #f7b733;
+
+  /* Hiệu ứng và viền */
+  --mau-vien: #45a29e;
+  --mau-phat-sang: rgba(102, 252, 241, 0.5);
+  --mau-nut-hover: #45a29e;
+}

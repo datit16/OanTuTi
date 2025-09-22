@@ -1,0 +1,122 @@
+@import url("bien-so.css");
+
+/* ------------------------------------------- */
+/* Cài đặt chung                */
+/* ------------------------------------------- */
+body {
+    background-color: var(--mau-nen-chinh);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Ẩn/hiện màn hình */
+.screen {
+    display: none;
+    padding: 20px;
+}
+.screen.active {
+    display: block;
+}
+
+/* ------------------------------------------- */
+/* Màn hình chính (Game)          */
+/* ------------------------------------------- */
+.score-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.score-board span {
+    padding: 0 15px;
+}
+
+.result {
+    font-size: 1.8rem;
+    margin-top: 30px;
+}
+.result .win {
+    color: var(--mau-thang);
+}
+.result .lose {
+    color: var(--mau-thua);
+}
+.result .draw {
+    color: var(--mau-hoa);
+}
+
+.choices {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.choice {
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 4px solid var(--border-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.choice:hover {
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.choice.selected {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 20px var(--glow-color), inset 0 0 10px var(--glow-color);
+    transform: scale(1.05);
+}
+
+.choice.dimmed {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Hiệu ứng viền phát sáng khi thắng */
+.choice.winner {
+    animation: glow-win 1s infinite alternate;
+    border-color: var(--win-color);
+}
+
+@keyframes glow-win {
+    from {
+        box-shadow: 0 0 10px var(--win-color), 0 0 20px var(--win-color);
+    }
+    to {
+        box-shadow: 0 0 20px var(--win-color), 0 0 40px var(--win-color);
+    }
+}
+/* ------------------------------------------- */
+/* Màn hình Chọn Chế Độ            */
+/* ------------------------------------------- */
+.mode-btn {
+    display: block;
+    width: 250px;
+    padding: 15px 20px;
+    margin: 20px auto;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    background: transparent;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.mode-btn:hover {
+    background: var(--button-hover-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
