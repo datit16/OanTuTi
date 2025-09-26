@@ -29,8 +29,8 @@
 
 .lua-chon img {
     /* Đảm bảo hình ảnh vừa khít với nút */
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
 
     /* Giữ nguyên tỉ lệ hình ảnh, không bị méo */
     object-fit: contain;
