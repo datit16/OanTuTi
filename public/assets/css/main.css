@@ -142,8 +142,10 @@ h1 {
 /* ------------------------------------------- */
 .nut-che-do {
     display: block;
-    width: 250px;
-    padding: 15px 20px;
+    width: 300px;
+    /* padding: 15px 0px; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 20px auto;
     font-size: 1.5rem;
     cursor: pointer;
@@ -194,4 +196,10 @@ h1 {
     color: white;
     margin-top: 20px;
     border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+    .nut-che-do {
+        width: 60%;
+    }
 }
