@@ -6,6 +6,7 @@ const manHinhDatTen = document.getElementById('man-hinh-dat-ten'); // MỚI
 const manHinhChoiGame = document.getElementById('man-hinh-choi-game');
 const manHinhKetThuc = document.getElementById('man-hinh-ket-thuc');
 const modalKetQuaVong = document.getElementById('modal-ket-qua-vong');
+const nutQuayLai = document.getElementById('nut-quay-lai');
 
 // Nút bấm
 const nutChoiVoiMay = document.getElementById('nut-choi-voi-may');
@@ -33,7 +34,7 @@ const dongHoDem = document.getElementById('thoi-gian-dem');
 let tenNguoiChoi = "Bạn"; // MỚI: Biến lưu tên người chơi
 let diemSoNguoiChoi = 0;
 let diemSoDoiThu = 0;
-const soVongDau = 5; 
+const soVongDau = 99; 
 let vongDauHienTai = 0;
 
 let luaChonNguoiChoi = '';
@@ -210,6 +211,15 @@ nutVanTiepTheo.addEventListener('click', () => {
     if (!kiemTraKetThucTranDau()) {
         datLaiGiaoDienVongMoi();
     }
+});
+
+nutQuayLai.addEventListener('click', () => {
+    // Dừng mọi hoạt động đang diễn ra (rất quan trọng!)
+    clearInterval(demNguocInterval);
+    dangChoi = false; // Cập nhật trạng thái game
+
+    // Quay về màn hình chọn chế độ
+    hienManHinh(manHinhChonCheDo);
 });
 
 // =================================================================
