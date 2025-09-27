@@ -1,17 +1,21 @@
 // =================================================================
-// LẤY CÁC PHẦN TỬ TỪ HTML (ĐÃ CẬP NHẬT THEO ID CỦA BẠN)
+// LẤY CÁC PHẦN TỬ TỪ HTML
 // =================================================================
 const manHinhChonCheDo = document.getElementById('man-hinh-chon-che-do');
+const manHinhDatTen = document.getElementById('man-hinh-dat-ten'); // MỚI
 const manHinhChoiGame = document.getElementById('man-hinh-choi-game');
 const manHinhKetThuc = document.getElementById('man-hinh-ket-thuc');
 const modalKetQuaVong = document.getElementById('modal-ket-qua-vong');
 
 // Nút bấm
 const nutChoiVoiMay = document.getElementById('nut-choi-voi-may');
+const nutBatDauChoi = document.getElementById('nut-bat-dau-choi'); // MỚI
 const nutChoiLaiKetThuc = document.getElementById('nut-choi-lai-ket-thuc');
 const nutVanTiepTheo = document.getElementById('nut-van-tiep-theo');
 
-// Hiển thị điểm số và kết quả
+// Hiển thị điểm số, kết quả và tên
+const hienThiTenNguoiChoi = document.getElementById('hien-thi-ten-nguoi-choi'); // MỚI
+const inputTenNguoiChoi = document.getElementById('input-ten-nguoi-choi'); // MỚI
 const diemSoNguoiChoiHienThi = document.getElementById('diem-so-nguoi-choi');
 const diemSoDoiThuHienThi = document.getElementById('diem-so-doi-thu');
 const ketQuaModalText = document.getElementById('chu-de-ket-qua');
@@ -26,9 +30,10 @@ const dongHoDem = document.getElementById('thoi-gian-dem');
 // =================================================================
 // CÁC BIẾN TRẠNG THÁI GAME
 // =================================================================
+let tenNguoiChoi = "Bạn"; // MỚI: Biến lưu tên người chơi
 let diemSoNguoiChoi = 0;
 let diemSoDoiThu = 0;
-const soVongDau = 5; // Có thể thay đổi số vòng đấu tại đây
+const soVongDau = 5; 
 let vongDauHienTai = 0;
 
 let luaChonNguoiChoi = '';
@@ -58,7 +63,6 @@ function hienModal(modal) {
 // Đặt lại giao diện cho vòng mới
 function datLaiGiaoDienVongMoi() {
     cacLuaChon.forEach(luaChon => {
-        // Loại bỏ class 'doi-thu' để không ảnh hưởng đến lựa chọn của đối thủ
         if (!luaChon.id.includes('doi-thu')) {
              luaChon.classList.remove('duoc-chon', 'lam-mo', 'nguoi-thang');
         }
@@ -67,7 +71,6 @@ function datLaiGiaoDienVongMoi() {
     dongHoDem.textContent = '3';
     dangChoi = true;
 }
-
 
 // Máy chọn ngẫu nhiên
 function mayChonNgauNhien() {
@@ -78,14 +81,8 @@ function mayChonNgauNhien() {
 
 // So sánh và xác định người thắng
 function xacDinhNguoiThang(nguoi, may) {
-    if (nguoi === may) {
-        return 'hoa';
-    }
-    if (
-        (nguoi === 'bua' && may === 'keo') ||
-        (nguoi === 'keo' && may === 'bao') ||
-        (nguoi === 'bao' && may === 'bua')
-    ) {
+    if (nguoi === may) return 'hoa';
+    if ((nguoi === 'bua' && may === 'keo') || (nguoi === 'keo' && may === 'bao') || (nguoi === 'bao' && may === 'bua')) {
         return 'thang';
     }
     return 'thua';
@@ -93,31 +90,23 @@ function xacDinhNguoiThang(nguoi, may) {
 
 // Cập nhật điểm số lên giao diện
 function capNhatDiemSo(ketQua) {
-    if (ketQua === 'thang') {
-        diemSoNguoiChoi++;
-    } else if (ketQua === 'thua') {
-        diemSoDoiThu++;
-    }
+    if (ketQua === 'thang') diemSoNguoiChoi++;
+    else if (ketQua === 'thua') diemSoDoiThu++;
     diemSoNguoiChoiHienThi.textContent = diemSoNguoiChoi;
     diemSoDoiThuHienThi.textContent = diemSoDoiThu;
 }
 
 // Hiển thị kết quả trong Modal
 function hienThiKetQuaVong(ketQua) {
-    const thongBao = {
-        thang: 'Bạn Thắng!',
-        thua: 'Bạn Thua!',
-        hoa: 'Hòa!'
-    };
+    const thongBao = { thang: 'Bạn Thắng!', thua: 'Bạn Thua!', hoa: 'Hòa!' };
     ketQuaModalText.textContent = thongBao[ketQua];
     hienModal(modalKetQuaVong);
 }
 
 // Bắt đầu đồng hồ đếm ngược
 function batDauDemNguoc() {
-    let thoiGianConLai = 2; // Bắt đầu đếm từ 2
+    let thoiGianConLai = 2; 
     dongHoDem.textContent = 3;
-
     demNguocInterval = setInterval(() => {
         dongHoDem.textContent = thoiGianConLai;
         if (thoiGianConLai <= 0) {
@@ -135,43 +124,29 @@ function kiemTraKetThucTranDau() {
         hienManHinh(manHinhKetThuc);
         diemSoCuoiCungNguoiChoi.textContent = diemSoNguoiChoi;
         diemSoCuoiCungDoiThu.textContent = diemSoDoiThu;
-        return true; // Trận đấu đã kết thúc
+        return true; 
     }
-    return false; // Trận đấu vẫn tiếp tục
+    return false;
 }
-
 
 // Xử lý logic khi một vòng đấu kết thúc
 function ketThucVongDau() {
     const luaChonCuaMay = mayChonNgauNhien();
-    
-    // Cập nhật hình ảnh lựa chọn của máy
     hinhAnhLuaChonDoiThu.src = `assets/img/${luaChonCuaMay}.png`;
-
     const ketQua = xacDinhNguoiThang(luaChonNguoiChoi, luaChonCuaMay);
     capNhatDiemSo(ketQua);
-    
-    // Hiệu ứng viền sáng cho người thắng
     if (ketQua === 'thang') {
         document.getElementById(luaChonNguoiChoi).classList.add('nguoi-thang');
     }
-    
-    // Hiển thị modal sau một khoảng trễ ngắn
-    setTimeout(() => {
-        hienThiKetQuaVong(ketQua);
-    }, 1000);
+    setTimeout(() => { hienThiKetQuaVong(ketQua); }, 1000);
 }
 
 // Xử lý khi người chơi chọn
 function xuLyKhiNguoiChoiChon(luaChonId) {
     if (!dangChoi) return;
-
-    dangChoi = false; // Ngăn người dùng chọn lại
+    dangChoi = false; 
     luaChonNguoiChoi = luaChonId;
-
-    // Hiệu ứng mờ và sáng
     cacLuaChon.forEach(lc => {
-        // Chỉ áp dụng hiệu ứng cho các lựa chọn của người chơi
         if (lc.id !== 'doi-thu') { 
             if (lc.id === luaChonId) {
                 lc.classList.add('duoc-chon');
@@ -182,17 +157,32 @@ function xuLyKhiNguoiChoiChon(luaChonId) {
             }
         }
     });
-
     batDauDemNguoc();
 }
-
 
 // =================================================================
 // GẮN CÁC SỰ KIỆN VÀO NÚT BẤM
 // =================================================================
+
+// 1. Khi người chơi chọn chế độ "Chơi với máy"
 nutChoiVoiMay.addEventListener('click', () => {
+    // Chuyển sang màn hình đặt tên thay vì màn hình chơi game
+    hienManHinh(manHinhDatTen);
+});
+
+// 2. Khi người chơi nhập tên xong và nhấn "Bắt đầu"
+nutBatDauChoi.addEventListener('click', () => {
+    // Lấy tên từ ô input, nếu trống thì dùng tên mặc định
+    const tenNhapVao = inputTenNguoiChoi.value.trim();
+    tenNguoiChoi = tenNhapVao || "Bạn";
+
+    // Cập nhật tên lên giao diện màn hình chơi game
+    hienThiTenNguoiChoi.textContent = tenNguoiChoi;
+
+    // Chuyển đến màn hình chơi game
     hienManHinh(manHinhChoiGame);
-    // Reset toàn bộ game
+
+    // Reset toàn bộ game để bắt đầu ván mới
     vongDauHienTai = 0;
     diemSoNguoiChoi = 0;
     diemSoDoiThu = 0;
@@ -201,13 +191,13 @@ nutChoiVoiMay.addEventListener('click', () => {
     datLaiGiaoDienVongMoi();
 });
 
+
 nutChoiLaiKetThuc.addEventListener('click', () => {
-    // Quay về màn hình chính, không cần reset vì khi bấm "Chơi với máy" sẽ reset
+    // Quay về màn hình chọn chế độ ban đầu
     hienManHinh(manHinhChonCheDo);
 });
 
 cacLuaChon.forEach(luaChon => {
-    // Đảm bảo không gắn sự kiện click cho div của đối thủ
     if (luaChon.id !== 'doi-thu') {
         luaChon.addEventListener('click', () => {
             xuLyKhiNguoiChoiChon(luaChon.id);

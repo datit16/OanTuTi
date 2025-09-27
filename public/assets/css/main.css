@@ -203,3 +203,29 @@ h1 {
         width: 60%;
     }
 }
+
+/* Thêm vào cuối file main.css */
+
+.form-dat-ten {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#input-ten-nguoi-choi {
+    font-size: 1.5rem;
+    padding: 15px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    background-color: var(--mau-nen-phu); /* Giả sử bạn có biến màu này */
+    border: 2px solid var(--mau-vien);
+    color: var(--mau-chu);
+    border-radius: 5px;
+}
+
+#input-ten-nguoi-choi::placeholder {
+    color: #8892b0; /* Màu xám nhạt */
+}
